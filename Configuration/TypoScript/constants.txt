@@ -1,0 +1,15 @@
+
+module.tx_dataport {
+	view {
+		# cat=module.tx_dataport/file; type=string; label=Path to template root (BE)
+		templateRootPath = EXT:data_port/Resources/Private/Backend/Templates/
+		# cat=module.tx_dataport/file; type=string; label=Path to template partials (BE)
+		partialRootPath = EXT:data_port/Resources/Private/Backend/Partials/
+		# cat=module.tx_dataport/file; type=string; label=Path to template layouts (BE)
+		layoutRootPath = EXT:data_port/Resources/Private/Backend/Layouts/
+	}
+	persistence {
+		# cat=module.tx_dataport//a; type=string; label=Default storage PID
+		storagePid =
+	}
+}

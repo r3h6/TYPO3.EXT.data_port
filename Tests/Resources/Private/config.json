@@ -1,0 +1,18 @@
+{
+  "table": {
+    "fe_users": {
+      "fields": {
+        "username": "Vorname + '.' + Nachname",
+        "password": "password",
+        "usergroup": {
+          "relation": {
+            "title": "Gruppe"
+          },
+          "fields": {
+            "title": "Gruppe"
+          }
+        }
+      }
+    }
+  }
+}

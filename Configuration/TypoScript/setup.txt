@@ -1,0 +1,12 @@
+
+ # Module configuration
+module.tx_dataport {
+	persistence {
+		storagePid = {$module.tx_dataport.persistence.storagePid}
+	}
+	view {
+		templateRootPath = {$module.tx_dataport.view.templateRootPath}
+		partialRootPath = {$module.tx_dataport.view.partialRootPath}
+		layoutRootPath = {$module.tx_dataport.view.layoutRootPath}
+	}
+}

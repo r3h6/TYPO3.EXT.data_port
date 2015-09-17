@@ -1,0 +1,7 @@
+import:
+  tt_address:
+    name:
+      field: Vorname+Nachname
+    crdate: test
+    tstamp:
+      method: now
