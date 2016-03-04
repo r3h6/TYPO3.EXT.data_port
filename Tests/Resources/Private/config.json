@@ -11,6 +11,10 @@
           "fields": {
             "title": "Gruppe"
           }
+        },
+        "email": {
+          "value": "E-Mail",
+          "validate": "EmailAddress"
         }
       }
     }

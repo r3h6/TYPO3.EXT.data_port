@@ -28,39 +28,45 @@ namespace Monogon\DataPort\Service;
  ***************************************************************/
 
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
-use PHPExcel_IOFactory;
-use PHPExcel_Cell;
-use PHPExcel_Cell_DataType;
+use Monogon\DataPort\Service\Import\ExcelDataProvider;
+use Monogon\DataPort\Service\Import\DatabaseImportService;
+use Monogon\DataPort\Service\Import\Configuration;
+use Monogon\DataPort\Service\Import\Exception\Exception as ImportServiceException;
 
 /**
  * ImportService
  */
 class ImportService {
 
-	public function import ($file){
-		$objPHPExcel = PHPExcel_IOFactory::load(GeneralUtility::getFileAbsFileName($file));
-		foreach ($objPHPExcel->getWorksheetIterator() as $worksheet) {
-				$worksheetTitle     = $worksheet->getTitle();
-				$highestRow         = $worksheet->getHighestRow(); // e.g. 10
-				$highestColumn      = $worksheet->getHighestColumn(); // e.g 'F'
-				$highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn);
-				$nrColumns = ord($highestColumn) - 64;
-				echo "<br>The worksheet ".$worksheetTitle." has ";
-				echo $nrColumns . ' columns (A-' . $highestColumn . ') ';
-				echo ' and ' . $highestRow . ' row.';
-				echo '<br>Data: <table border="1"><tr>';
-				for ($row = 1; $row <= $highestRow; ++ $row) {
-						echo '<tr>';
-						for ($col = 0; $col < $highestColumnIndex; ++ $col) {
-								$cell = $worksheet->getCellByColumnAndRow($col, $row);
-								$val = $cell->getValue();
-								$dataType = PHPExcel_Cell_DataType::dataTypeForValue($val);
-								echo '<td>' . $val . '<br>(Typ ' . $dataType . ')</td>';
-						}
-						echo '</tr>';
-				}
-				echo '</table>';
+	/**
+	 * ObjectManager
+	 * @var TYPO3\CMS\Extbase\Object\ObjectManager
+	 * @inject
+	 */
+	protected $objectManager = NULL;
+
+	public function import ($data, Configuration $configuration){
+
+		$offset = 0;
+
+		$dataProvider = $this->objectManager->get(ExcelDataProvider::class, $data, $offset);
+		$importService = $this->objectManager->get($configuration->getImportServiceClass(), $configuration);
+
+		//$this->signalSlotDispatcher->connect(get_class($reader), 'readDataset', $writer, 'writeDataset');
+
+		$dataProvider->initializeObject();
+
+		$failures = 0;
+
+		while ($dataProvider->hasNextDataset()){
+			try {
+				$dataset = $dataProvider->getNextDataset();
+				$importService->importDataset($dataset);
+			} catch (ImportServiceException $exception){
+				$failures++;
+			}
 		}
-		exit;
+
+
 	}
 }

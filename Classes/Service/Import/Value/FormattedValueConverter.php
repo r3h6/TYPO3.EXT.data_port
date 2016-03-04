@@ -1,5 +1,5 @@
 <?php
-namespace Monogon\DataPort\Domain\Model;
+namespace Monogon\DataPort\Service\Import\Value;
 
 /***************************************************************
  *
@@ -26,63 +26,16 @@ namespace Monogon\DataPort\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use Monogon\DataPort\Service\Import\Dto\Dataset;
+
+
 /**
- * Configuration
+ * FormattedValueConverter
  */
-class Configuration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
+class FormattedValueConverter {
 
-	/**
-	 * Title
-	 *
-	 * @var string
-	 * @validate NotEmpty
-	 */
-	protected $title = '';
+	public function convertFrom ($value, Dataset $dataset){
 
-	/**
-	 * Configuration
-	 *
-	 * @var string
-	 * @validate NotEmpty
-	 */
-	protected $configuration = '';
-
-	/**
-	 * Returns the title
-	 *
-	 * @return string $title
-	 */
-	public function getTitle() {
-		return $this->title;
+		return $value;
 	}
-
-	/**
-	 * Sets the title
-	 *
-	 * @param string $title
-	 * @return void
-	 */
-	public function setTitle($title) {
-		$this->title = $title;
-	}
-
-	/**
-	 * Returns the configuration
-	 *
-	 * @return string $configuration
-	 */
-	public function getConfiguration() {
-		return $this->configuration;
-	}
-
-	/**
-	 * Sets the configuration
-	 *
-	 * @param string $configuration
-	 * @return void
-	 */
-	public function setConfiguration($configuration) {
-		$this->configuration = $configuration;
-	}
-
 }

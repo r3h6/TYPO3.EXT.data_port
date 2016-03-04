@@ -32,16 +32,21 @@ namespace Monogon\DataPort\Controller;
  */
 class ImportController extends ActionController {
 
+	/**
+	 * [$importService description]
+	 * @var Monogon\DataPort\Service\ImportService
+	 */
+	protected $importService = NULL;
 
 	public function indexAction (){
 
 	}
 
-	public function previewAction (){
+	public function previewAction ($file, $config){
 
 	}
 
-	public function importAction (){
+	public function importAction ($file, $config){
 
 	}
 

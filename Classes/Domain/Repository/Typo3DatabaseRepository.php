@@ -1,5 +1,5 @@
 <?php
-namespace Monogon\DataPort\Domain\Model;
+namespace Monogon\DataPort\Domain\Repository;
 
 /***************************************************************
  *
@@ -26,63 +26,35 @@ namespace Monogon\DataPort\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use Monogon\DataPort\Service\Import\Configuration;
+
 /**
- * Configuration
+ * The repository for Configurations
  */
-class Configuration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
+class Typo3DatabaseRepository {
+	//extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
-	/**
-	 * Title
-	 *
-	 * @var string
-	 * @validate NotEmpty
-	 */
-	protected $title = '';
+	public function importDataset ($dataset, Configuration $configuration){
 
-	/**
-	 * Configuration
-	 *
-	 * @var string
-	 * @validate NotEmpty
-	 */
-	protected $configuration = '';
+		$relations = $this->getRelations($configuration);
 
-	/**
-	 * Returns the title
-	 *
-	 * @return string $title
-	 */
-	public function getTitle() {
-		return $this->title;
+
+
 	}
 
-	/**
-	 * Sets the title
-	 *
-	 * @param string $title
-	 * @return void
-	 */
-	public function setTitle($title) {
-		$this->title = $title;
-	}
+	// data[fe_users][3][usergroup] = 1,2,3
 
-	/**
-	 * Returns the configuration
-	 *
-	 * @return string $configuration
-	 */
-	public function getConfiguration() {
-		return $this->configuration;
-	}
 
-	/**
-	 * Sets the configuration
-	 *
-	 * @param string $configuration
-	 * @return void
-	 */
-	public function setConfiguration($configuration) {
-		$this->configuration = $configuration;
-	}
+	protected function getRelations ($configuration){
+		$table = $configuration->getTable();
+		$index = $configuration->getIndex();
 
+		$relations = array();
+		foreach ($GLOBALS['TCA'][$table]['columns'] as $column => $tca){
+			if (isset($tca['tx_dataport'][$index]) && isset($tca['config']['foreign_table'])){
+				$relations[] = $column;
+			}
+		}
+		return $relations;
+	}
 }

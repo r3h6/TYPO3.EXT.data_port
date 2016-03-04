@@ -69,13 +69,13 @@
         "backendModules": [
             {
                 "actions": {
-                    "controllerActionCombinations": "Data=>import"
+                    "controllerActionCombinations": "Import=>index,preview,import"
                 },
                 "description": "Import data.",
                 "key": "mod1",
-                "mainModule": "tools",
+                "mainModule": "web",
                 "name": "Data port",
-                "tabLabel": "Import data."
+                "tabLabel": "Import data"
             }
         ],
         "description": "Import data into database.",
@@ -92,7 +92,7 @@
         },
         "extensionKey": "data_port",
         "name": "Data port",
-        "originalExtensionKey": "",
+        "originalExtensionKey": "data_port",
         "persons": [
             {
                 "company": "",
@@ -110,7 +110,7 @@
 
     ],
     "log": {
-        "last_modified": "2015-09-11 05:35",
+        "last_modified": "2015-09-17 08:30",
         "extension_builder_version": "6.2.0",
         "be_user": " (1)"
     }

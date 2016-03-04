@@ -1,6 +1,5 @@
 <?php
-namespace Monogon\DataPort\Domain\Repository;
-
+namespace Monogon\DataPort\Service\Import;
 
 /***************************************************************
  *
@@ -28,9 +27,9 @@ namespace Monogon\DataPort\Domain\Repository;
  ***************************************************************/
 
 /**
- * The repository for Configurations
+ * ImportServiceInterface
  */
-class ConfigurationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+interface ImportServiceInterface {
 
-	
+	// public function importRecord ($record);
 }

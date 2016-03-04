@@ -1,5 +1,5 @@
 <?php
-namespace Monogon\DataPort\Domain\Model;
+namespace Monogon\DataPort\Service\Import\Dto;
 
 /***************************************************************
  *
@@ -27,62 +27,21 @@ namespace Monogon\DataPort\Domain\Model;
  ***************************************************************/
 
 /**
- * Configuration
+ * Dataset
  */
-class Configuration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
+class Dataset {
 
-	/**
-	 * Title
-	 *
-	 * @var string
-	 * @validate NotEmpty
-	 */
-	protected $title = '';
+	protected $data = array();
 
-	/**
-	 * Configuration
-	 *
-	 * @var string
-	 * @validate NotEmpty
-	 */
-	protected $configuration = '';
-
-	/**
-	 * Returns the title
-	 *
-	 * @return string $title
-	 */
-	public function getTitle() {
-		return $this->title;
+	public function add ($key, $value){
+		$this->data[$key] = $value;
 	}
 
-	/**
-	 * Sets the title
-	 *
-	 * @param string $title
-	 * @return void
-	 */
-	public function setTitle($title) {
-		$this->title = $title;
+	public function get($key){
+		return $this->data[$key];
 	}
 
-	/**
-	 * Returns the configuration
-	 *
-	 * @return string $configuration
-	 */
-	public function getConfiguration() {
-		return $this->configuration;
+	public function getKeys (){
+		return array_keys($this->data);
 	}
-
-	/**
-	 * Sets the configuration
-	 *
-	 * @param string $configuration
-	 * @return void
-	 */
-	public function setConfiguration($configuration) {
-		$this->configuration = $configuration;
-	}
-
 }
